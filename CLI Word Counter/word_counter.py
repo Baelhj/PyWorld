@@ -1,3 +1,5 @@
+import string
+
 # file input
 file = input("enter the file path: ")
 
@@ -7,7 +9,11 @@ try:
         poem = f.read()
 
         # count words in file
-        words = poem.split()
+        poem_words = poem.lower()
+        ex = str.maketrans("", "", string.punctuation)
+        res = poem_words.translate(ex)
+        words = res.split()
+
         word_count = len(words)
         print(words)
         print("Total words is: ", word_count)
