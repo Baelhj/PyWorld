@@ -2,7 +2,7 @@ import string
 
 # file input
 file = input("enter the file path: ")
-print("--- Results ---")
+print(f"\n --- Results --- \n")
 
 # open file
 try:
@@ -30,15 +30,15 @@ try:
             else:
                 word_dict[w] = 1
 
-        tw = ""
-        wc = ""
+        words_list = set(word_dict.items())
+        sorted_list = sorted(words_list, key=lambda word: word[1], reverse=True)
         print(
-            f"""Top 5 words: \n
-              1. {tw} → {wc} \n
-              2. {tw} → {wc} \n
-              3. {tw} → {wc} \n
-              4. {tw} → {wc} \n
-              5. {tw} → {wc}
+            f"""\nTop 5 words:
+1. {sorted_list[0][0]} → {sorted_list[0][1]}
+2. {sorted_list[1][0]} → {sorted_list[1][1]}
+3. {sorted_list[2][0]} → {sorted_list[2][1]}
+4. {sorted_list[3][0]} → {sorted_list[3][1]}
+5. {sorted_list[4][0]} → {sorted_list[4][1]}
               """
         )
 
