@@ -1,11 +1,47 @@
 import string
 
-# file input
-file = input("enter the file path: ")
-print(f"\n --- Results --- \n")
+
+def my_file():
+    # file input
+    file = input("enter the file path: ")
+    return file
+
+
+def file_check():
+    file = my_file()
+    try:
+        with open(file, encoding="utf-8") as f:
+            poem = f.read()
+            return poem
+
+    except FileNotFoundError:
+        print("File Not Found bro!")
+
+file_check()
+
+def clean_text(poem: str):
+    poem = file_check()
+    poem_words = poem.lower()
+    ex = str.maketrans("", "", string.punctuation)
+    res = poem_words.translate(ex)
+    words = res.split()
+    return words
+
+clean_text(poem)
+
+def word_counter(words):
+    words = res.split()
+    word_count = len(words)
+    print(f"\n --- Results --- \n")
+    print("Total words: ", word_count)
+    unique_words = len(set(words))
+    print("Unique words: ", unique_words)
+
 
 # open file
 try:
+    file = my_file()
+    print(f"\n --- Results --- \n")
     with open(file, encoding="utf-8") as f:
         poem = f.read()
 
@@ -30,18 +66,19 @@ try:
             else:
                 word_dict[w] = 1
 
-        words_list = set(word_dict.items())
+        words_list = word_dict.items()
         sorted_list = sorted(words_list, key=lambda word: word[1], reverse=True)
-        print(
-            f"""\nTop 5 words:
-1. {sorted_list[0][0]} → {sorted_list[0][1]}
-2. {sorted_list[1][0]} → {sorted_list[1][1]}
-3. {sorted_list[2][0]} → {sorted_list[2][1]}
-4. {sorted_list[3][0]} → {sorted_list[3][1]}
-5. {sorted_list[4][0]} → {sorted_list[4][1]}
-              """
-        )
 
+        print(f"\nTop 5 words:")
+
+        top = 0
+
+        for i in sorted_list:
+            if top < 5:
+                top += 1
+                print(f"{top}. {i[0]} → {i[1]}")
+            else:
+                break
 
 except FileNotFoundError:
     print("File Not Found bro")
